@@ -16,7 +16,16 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profil'),
+        title: Text(
+          'Profil',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.surface,
+          ),
+        ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.surface,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -49,7 +49,18 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Connexion'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.surface,
+        ),
+        title: Text(
+          'Connexion',
+          style: TextStyle(
+            color: Theme.of(context)
+                .colorScheme
+                .surface,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

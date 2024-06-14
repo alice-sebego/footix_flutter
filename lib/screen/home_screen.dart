@@ -4,7 +4,7 @@ import 'package:footix_flutter/screen/signin.dart';
 import 'package:footix_flutter/screen/gameboard.dart';
 import 'package:provider/provider.dart';
 import '../providers/user.provider.dart';
-
+import '../widgets/animations/fade.animation.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,6 +17,11 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: IconThemeData(
+          color: Theme.of(context)
+              .colorScheme
+              .surface,
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.account_circle),
@@ -42,10 +47,12 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Es-tu un footix ... ou pas ?',
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    )),
+            FadeAnimation(
+              child: Text('Es-tu un footix ... ou pas ?',
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      )),
+            ),
             const SizedBox(height: 30),
             Stack(
               alignment: Alignment.center,
@@ -56,35 +63,35 @@ class HomeScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 Positioned(
-                bottom: -5,
-                child: Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (isLoggedIn) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const GameBoard()),
-                        );
-                      } else {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignInScreen()),
-                        );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor:
-                          Theme.of(context).colorScheme.onPrimary,
-                      backgroundColor:
-                          Theme.of(context).colorScheme.primary,
-                    ),
-                    child: Text(
-                        isLoggedIn ? 'Yep ! je joue' : 'Je me connecte'),
-                  ),
-                )),
+                    bottom: -5,
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 20),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (isLoggedIn) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const GameBoard()),
+                            );
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignInScreen()),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor:
+                              Theme.of(context).colorScheme.onPrimary,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
+                        ),
+                        child: Text(
+                            isLoggedIn ? 'Yep ! je joue' : 'Je me connecte'),
+                      ),
+                    )),
               ],
             ),
           ],
@@ -93,5 +100,4 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
     );
   }
-  
 }

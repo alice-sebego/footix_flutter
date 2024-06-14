@@ -7,7 +7,16 @@ class CguScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CGU'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.surface,
+        ),
+        title: Text(
+            'CGU',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.surface,
+            ),
+          ),
       ),
       body: const Center(
         child: Text('This is the CGU Screen'),
