@@ -22,6 +22,8 @@ class User {
   final String? picture;
   final int? accumulatedPoints;
   final bool? rgpd;
+  // ignore: non_constant_identifier_names
+  final String? access_token;
 
   User({
     required this.id,
@@ -35,6 +37,8 @@ class User {
     this.picture,
     this.accumulatedPoints,
     this.rgpd,
+    // ignore: non_constant_identifier_names
+    this.access_token
   });
 
   // Deserialisation
@@ -51,6 +55,7 @@ class User {
       picture: json['picture'],
       accumulatedPoints: json['accumulated_points'],
       rgpd: json['rgpd'],
+      access_token: json['access_token'],
     );
   }
 
@@ -68,6 +73,7 @@ class User {
       'picture': picture,
       'accumulated_points': accumulatedPoints,
       'rgpd': rgpd,
+      'access_token': access_token,
     };
   }
 }

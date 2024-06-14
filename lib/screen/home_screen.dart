@@ -2,20 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:footix_flutter/screen/profile_screen.dart';
 import 'package:footix_flutter/screen/signin.dart';
 import 'package:footix_flutter/screen/gameboard.dart';
+import 'package:provider/provider.dart';
+import '../providers/user.provider.dart';
 
-class HomeScreen extends StatefulWidget {
+
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final bool isLoggedIn = false; // TODO - create authentication logic
-  
-  @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final bool isLoggedIn = userProvider.user != null;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -47,8 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Text('Es-tu un footix ... ou pas ?',
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       color: Theme.of(context).colorScheme.primary,
-                    )
-                ),
+                    )),
             const SizedBox(height: 30),
             Stack(
               alignment: Alignment.center,
@@ -59,41 +56,41 @@ class _HomeScreenState extends State<HomeScreen> {
                   fit: BoxFit.cover,
                 ),
                 Positioned(
-                  bottom: -5,
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 20),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (isLoggedIn) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
+                bottom: -5,
+                child: Container(
+                  margin: const EdgeInsets.only(top: 20),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (isLoggedIn) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
                               builder: (context) => const GameBoard()),
-                          );
-                        } else {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
                               builder: (context) => const SignInScreen()),
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                      ),
-                      child:
-                        Text(isLoggedIn ? 'Yep ! je joue' : 'Je me connecte'),
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor:
+                          Theme.of(context).colorScheme.onPrimary,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.primary,
                     ),
-                  ) 
-                ),
+                    child: Text(
+                        isLoggedIn ? 'Yep ! je joue' : 'Je me connecte'),
+                  ),
+                )),
               ],
             ),
           ],
         ),
       ),
-      backgroundColor:
-          Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.background,
     );
   }
   
